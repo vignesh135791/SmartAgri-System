@@ -35,6 +35,8 @@ available in one accessible workflow.
 - Receives sensor and camera updates over WebSockets.
 - Shows camera images, rain probability, weather context, and crop forecasts.
 - Presents rolling sensor charts and yield comparisons.
+- Generates explainable crop and productivity suggestions from sensor readings
+  and recent harvest records.
 - Supports farmer registration and JWT-based sign-in.
 - Saves yield records locally first and synchronizes them with the backend.
 - Provides Tamil/English text-to-speech accessibility support.
@@ -203,6 +205,7 @@ device, use the host computer's LAN address instead.
 | `GET` | `/api/yields` | List the current user's records | Bearer JWT |
 | `POST` | `/api/yields` | Create a yield record | Bearer JWT |
 | `POST` | `/api/sensors` | Validate and ingest a sensor reading | Device auth planned |
+| `GET` | `/api/recommendations/latest` | Generate ranked crop/productivity suggestions | Bearer JWT |
 | `WS` | `/ws` | Receive live sensor broadcasts | Device/app auth planned |
 
 Interactive API documentation is available at
@@ -239,28 +242,6 @@ flutter test
 The Flutter SDK and Docker Desktop must be installed locally before running
 the Flutter and container checks.
 
-## Roadmap
-
-The next production-hardening steps are:
-
-- Add Alembic migrations instead of startup-only table creation.
-- Add farm and device ownership models.
-- Authenticate device ingestion and WebSocket connections.
-- Consolidate the Flutter app onto one shared WebSocket connection.
-- Add automatic reconnect and offline synchronization queues.
-- Add sensor-history queries, alerts, and push notifications.
-- Add a real crop-prediction worker and model versioning.
-- Add integration tests against MySQL and the running API.
-- Deploy behind HTTPS/WSS with centralized logs and metrics.
-
-## Resume summary
-
-> Built a full-stack Smart Agriculture monitoring platform using Flutter,
-> FastAPI, MySQL, SQLAlchemy, WebSockets, JWT authentication, and Docker
-> Compose. Implemented live sensor dashboards, camera/weather visualization,
-> crop recommendation presentation, bilingual accessibility, local-first yield
-> capture, and authenticated backend synchronization with environment-only
-> secret management.
 
 ## License
 

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../config/app_config.dart';
 import '../models/yeild_record.dart';
+import '../models/ai_recommendation.dart';
 
 class ApiClient {
   String? _accessToken;
@@ -88,6 +89,17 @@ class ApiClient {
     );
     _ensureSuccess(response);
     return YieldRecord.fromJson(Map<String, dynamic>.from(jsonDecode(response.body)));
+  }
+
+  Future<AiRecommendation> getLatestRecommendation() async {
+    final response = await http.get(
+      Uri.parse('${AppConfig.apiBaseUrl}/api/recommendations/latest'),
+      headers: _headers,
+    );
+    _ensureSuccess(response);
+    return AiRecommendation.fromJson(
+      Map<String, dynamic>.from(jsonDecode(response.body)),
+    );
   }
 
   void _ensureSuccess(http.Response response) {

@@ -3,12 +3,13 @@ import json
 
 from fastapi import Depends, FastAPI, HTTPException, WebSocket, WebSocketDisconnect, status
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import select
+from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .config import get_settings
 from .database import create_tables, get_session
 from .models import SensorReading, User, YieldRecord
+from .recommendations import build_recommendation
 from .schemas import (
     LoginRequest,
     SensorReadingCreate,
@@ -18,6 +19,7 @@ from .schemas import (
     UserResponse,
     YieldCreate,
     YieldResponse,
+    RecommendationResponse,
 )
 from .security import create_access_token, current_user, hash_password, verify_password
 
@@ -135,6 +137,23 @@ async def ingest_sensor(
         {"type": "sensor_data", "sensor_data": payload.model_dump(mode="json")}
     )
     return reading
+
+
+@app.get("/api/recommendations/latest", response_model=RecommendationResponse)
+async def latest_recommendation(
+    user: User = Depends(current_user),
+    session: AsyncSession = Depends(get_session),
+) -> dict:
+    latest_reading = await session.scalar(
+        select(SensorReading).order_by(desc(SensorReading.recorded_at)).limit(1)
+    )
+    yield_result = await session.scalars(
+        select(YieldRecord)
+        .where(YieldRecord.owner_id == user.id)
+        .order_by(desc(YieldRecord.recorded_date))
+        .limit(30)
+    )
+    return build_recommendation(latest_reading, list(yield_result))
 
 
 @app.websocket("/ws")

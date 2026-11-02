@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../providers/data_provider.dart';
 import '../models/sensor_data.dart';
 import 'cw.dart';
+import '../widgets/recommendation_card.dart';
 
 class ProductivityScreen extends StatelessWidget {
   const ProductivityScreen({super.key});
@@ -184,6 +185,9 @@ class ProductivityScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       
                       _liveGraphCard(provider),
+                      const SizedBox(height: 20),
+
+                      const RecommendationCard(),
                       const SizedBox(height: 20),
 
                       if (provider.sensorData?.cropPrediction != null)

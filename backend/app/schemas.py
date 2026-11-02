@@ -56,3 +56,17 @@ class SensorReadingResponse(SensorReadingCreate):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+
+
+class CropRecommendation(BaseModel):
+    crop: str
+    confidence: float
+    reasons: list[str]
+
+
+class RecommendationResponse(BaseModel):
+    status: str
+    summary: str
+    confidence: float
+    recommendations: list[CropRecommendation]
+    productivity_insights: list[str]
