@@ -239,28 +239,6 @@ flutter test
 The Flutter SDK and Docker Desktop must be installed locally before running
 the Flutter and container checks.
 
-## Roadmap
-
-The next production-hardening steps are:
-
-- Add Alembic migrations instead of startup-only table creation.
-- Add farm and device ownership models.
-- Authenticate device ingestion and WebSocket connections.
-- Consolidate the Flutter app onto one shared WebSocket connection.
-- Add automatic reconnect and offline synchronization queues.
-- Add sensor-history queries, alerts, and push notifications.
-- Add a real crop-prediction worker and model versioning.
-- Add integration tests against MySQL and the running API.
-- Deploy behind HTTPS/WSS with centralized logs and metrics.
-
-## Resume summary
-
-> Built a full-stack Smart Agriculture monitoring platform using Flutter,
-> FastAPI, MySQL, SQLAlchemy, WebSockets, JWT authentication, and Docker
-> Compose. Implemented live sensor dashboards, camera/weather visualization,
-> crop recommendation presentation, bilingual accessibility, local-first yield
-> capture, and authenticated backend synchronization with environment-only
-> secret management.
 
 ## License
 
