@@ -1,0 +1,62 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Local databases and session state
+*.db
+*.db-shm
+*.db-wal
+.pytest_cache/
+
+# Legacy/duplicate experiments kept locally but not part of the final system
+cas/
+flutter_application_1/
+
+# Secrets and local environment overrides
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Flutter/Dart generated files
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/build/
+**/coverage/
+**/pubspec_overrides.yaml
+**/*.iml
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/
+**/android/.gradle/
+**/android/local.properties
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+*.symbols
+*.map.json
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
